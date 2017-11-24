@@ -25,6 +25,7 @@ if (Session::get('start') != null) {
     <meta name="theme-color" content="black" />
     <!-- Latest compiled JavaScript -->
     <script src="public/assests/js/bootstrap.min.js"></script>
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
     <style type="text/css">
       .navbar {
                 border-radius: 0;
@@ -85,6 +86,16 @@ if (Session::get('start') != null) {
             </div>
             <button type="button" class="btn btn-success" onclick="loginCheck()" value="Login">Submit</button>
           </form>
+          <hr/>
+           <div class="row">
+            <div class="col-sm-12 text-center">
+              <h2 class="heading">Login with Social Accounts </h2>
+            </div>
+            <hr>
+              <div id="my-signin2"></div>
+              
+          </div>
+
         </div>
 
         <!-- Register -->
@@ -126,6 +137,8 @@ if (Session::get('start') != null) {
     <!-- Scripts -->
     <script type="text/javascript" src="public/assests/js/login_validate.js"></script>
     <script type="text/javascript" src="public/assests/js/register_validate.js"></script>
+     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script type="text/javascript" src="public/assests/js/socialogin.js"></script>
   </body>
 
 
