@@ -25,6 +25,11 @@ if (Session::get('start') != null) {
     <meta name="theme-color" content="black" />
     <!-- Latest compiled JavaScript -->
     <script src="public/assests/js/bootstrap.min.js"></script>
+
+    <!-- libraries for google login -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="779570161326-uav2hjtponrl01u1bkd7c9jjd9e5tp3b.apps.googleusercontent.com">
+
     <style type="text/css">
       .navbar {
                 border-radius: 0;
@@ -35,6 +40,9 @@ if (Session::get('start') != null) {
             input {
               border-radius: 0px;
             }
+      .googlelogin{
+            padding-top: 10%;
+      }
     </style>
   </head>
 
@@ -85,7 +93,20 @@ if (Session::get('start') != null) {
             </div>
             <button type="button" class="btn btn-success" onclick="loginCheck()" value="Login">Submit</button>
           </form>
-        </div>
+          
+          <div class="row">
+               <!-- Adding the google login button -->
+            <div class=" col-sm-6">
+                 <div class="googlelogin">
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                   </div>
+            </div>          
+                  <!-- Adding the facebook login button -->
+                  <div class="col-sm-6">
+                      <div class="fb-login-button" style="padding-top: 13%;" scope="public_profile,email" onlogin="checkLoginState();" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                  </div>
+            </div>
+          </div>
 
         <!-- Register -->
         <div class="col-sm-4 col-sm-offset-2">
@@ -126,7 +147,7 @@ if (Session::get('start') != null) {
     <!-- Scripts -->
     <script type="text/javascript" src="public/assests/js/login_validate.js"></script>
     <script type="text/javascript" src="public/assests/js/register_validate.js"></script>
+    <script src="public/assests/js/socialauth_validate.js"></script>
   </body>
-
-
   </html>
+
