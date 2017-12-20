@@ -1,10 +1,9 @@
-
 //  Function to authenticate g login
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     // var id_token = googleUser.getAuthResponse().id_token;
     // console.log(id_token);
-    googleSignedIn=true;
+    //googleSignedIn=true;
     console.log('ID: ' + profile.getId()); 
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
@@ -22,6 +21,7 @@ function onSignIn(googleUser) {
     };
     sendData(q);
   }
+
 
      function signOut() {
      var auth2 = gapi.auth2.getAuthInstance();
@@ -100,8 +100,8 @@ function onSignIn(googleUser) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function()
         {
-           /* if (xmlhttp.readyState == 4 && xmlhttp.status == 200)*/
-            /*{
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+            {
                 var result = JSON.parse(xmlhttp.responseText);
                 // console.log(result);
                 if(result["location"])
@@ -111,7 +111,7 @@ function onSignIn(googleUser) {
                 $(result).each(function(index, element) {
                     showError(element["key"], element["value"]);
                 });
-            }*/
+            }
         };
         xmlhttp.open("POST", "views/validate_socialauth.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

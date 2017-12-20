@@ -23,8 +23,8 @@ if (isset($_POST['q'])) {
     $result = $obSocialLogin->authSocialLogin($data);
 
      if (isset($result)) {
-         echo 'result' . $result;
+         echo $result;
      } else {
-         echo 'error'.json_encode([]);
+         echo json_encode([]);
      }
 }

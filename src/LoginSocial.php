@@ -61,7 +61,7 @@ class LoginSocial
     }
 
     /**
-     * To Authenticate User Credentials
+     * To Authenticate User Social Credentials
      *
      * @param array $data To store User Credentials
      *
@@ -86,6 +86,8 @@ class LoginSocial
         elseif ($authFlag == 'g_auth') {
           $query = "SELECT * FROM register WHERE email='$email' and g_id='$id'";
         }
+
+        /*If records found, log in */
             
          if ($result = $this->connect->query($query)) {
 
@@ -104,6 +106,8 @@ class LoginSocial
             }
 
        }
+
+       /* If email found update the google id or facebook id field and login*/
 
        $query= "SELECT * FROM register WHERE email='$email'";
        if ($result = $this->connect->query($query)) {
@@ -137,13 +141,15 @@ class LoginSocial
 
        }
 
+       /* If no records of email found register the user in database and login in. */
+
        if($authFlag == 'fb_auth'){
     
-              $query = "INSERT INTO register VALUES(null, '$email', null, null,null,'$id')";
+              $query = "INSERT INTO register VALUES(null, '$email', '$email', null,null,'$id')";
         
                 }elseif ($authFlag == 'g_auth') {
         
-            $query = "INSERT INTO register VALUES(null, '$email', null, null,'$id',null)";           
+            $query = "INSERT INTO register VALUES(null, '$email', '$email', null,'$id',null)";           
                 }
         $this->connect->query($query);
 
@@ -153,7 +159,7 @@ class LoginSocial
             $row = $result->fetch_assoc();
             $userId = $row['id'];
             $query = "INSERT INTO login VALUES 
-            ('$userId', '$name', '$email', null, null, 0)";
+            ('$userId', '$name', '$email', '$email', null, 0)";
             $this->connect->query($query);
 
             $query = "INSERT INTO profile VALUES(
@@ -170,6 +176,13 @@ class LoginSocial
         }
 
     } else{
+        /**
+          * If email is not received in API.
+          * Check if any account with same fb id or google id is present.
+          * If present, login.
+          *
+          * 
+        */
 
         if($authFlag == 'fb_auth'){
             $query = "SELECT * FROM register WHERE fb_id='$id'";
@@ -195,8 +208,14 @@ class LoginSocial
             }
 
        }
+        
+        /* If no account present, throw error because email or username is necessary for further functionalities of the app like account and message section.*/
 
-       if($authFlag == 'fb_auth'){
+       return json_encode(
+                ["Error" => "Email not found! Please make your email ID public."]
+            );
+
+      /* if($authFlag == 'fb_auth'){
     
               $query = "INSERT INTO register VALUES(null, null, null, null,null,'$id')";
         
@@ -235,9 +254,9 @@ class LoginSocial
                 "location" => getenv('APP_URL')."/views/account.php"
                 ]
             );
-        }
+        }*/
 
-    }
+      }
     }
             
 }
