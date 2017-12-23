@@ -1,3 +1,3 @@
-$(".edit a").click(function() {
+/*$(".edit a").click(function() {
     $("#profile").show();
-});
+});*/
